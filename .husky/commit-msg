@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 relevant_line=$(awk '/^# ------------------------ >8 ------------------------/{exit} !/^#/ && NF {print; exit}' "$1")
 
 [ -z "$relevant_line" ] && exit 0
