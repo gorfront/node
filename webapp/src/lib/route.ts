@@ -6,4 +6,4 @@ export const getAllIteasRoute = () => "/";
 
 export const viewRouteParams = getRouteParams({ ideasNick: true });
 export type viewRouteParams = typeof viewRouteParams;
-export const getViewIdeRoute = ({ ideasNick }: viewRouteParams) => `/ideas/${ideasNick}`;
+export const getViewIdeaRoute = ({ ideasNick }: viewRouteParams) => `/ideas/${ideasNick}`;

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TrpcProvider } from "./lib/trpc";
 import { AllIdeasPage } from "./pages/AllIdeasPage";
 import { ViewIdeaPage } from "./pages/ViewIdeaPage";
-import { getAllIteasRoute, getViewIdeRoute, viewRouteParams } from "./lib/route";
+import { getAllIteasRoute, getViewIdeaRoute, viewRouteParams } from "./lib/route";
 import { Layout } from "./components/layout";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path={getAllIteasRoute()} element={<AllIdeasPage />} />
-            <Route path={getViewIdeRoute(viewRouteParams)} element={<ViewIdeaPage />} />
+            <Route path={getViewIdeaRoute(viewRouteParams)} element={<ViewIdeaPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
