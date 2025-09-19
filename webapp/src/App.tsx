@@ -2,15 +2,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TrpcProvider } from "./lib/trpc";
 import { AllIdeasPage } from "./pages/AllIdeasPage";
 import { ViewIdeaPage } from "./pages/ViewIdeaPage";
-import { getAllIteasRoute, getViewIdeRoute } from "./lib/route";
+import { getAllIteasRoute, getViewIdeRoute, viewRouteParams } from "./lib/route";
+import { Layout } from "./components/layout";
 
 function App() {
   return (
     <TrpcProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={getAllIteasRoute()} element={<AllIdeasPage />} />
-          <Route path={getViewIdeRoute({ ideasNick: ":ideasNick" })} element={<ViewIdeaPage />} />
+          <Route element={<Layout />}>
+            <Route path={getAllIteasRoute()} element={<AllIdeasPage />} />
+            <Route path={getViewIdeRoute(viewRouteParams)} element={<ViewIdeaPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </TrpcProvider>

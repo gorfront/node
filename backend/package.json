@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "ts-node-dev --rs src/index.ts",
+    "dev": "node --loader ts-node/esm src/index.ts",
     "build": "rimraf ./dist && tsc - -build ./tsconfig.json",
     "start": "node ./dist/index.js",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts src",
@@ -18,9 +18,12 @@
   },
   "dependencies": {
     "@trpc/server": "^11.5.1",
+    "@types/lodash": "^4.17.20",
     "@typescript-eslint/eslint-plugin": "^8.44.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "typescript-eslint": "^8.44.0"
+    "lodash": "^4.17.21",
+    "typescript-eslint": "^8.44.0",
+    "zod": "^4.1.9"
   }
 }
