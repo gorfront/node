@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { getAllIteasRoute } from "../../lib/route";
+import * as route from "../../lib/route";
 import css from "./index.module.scss";
 
 export const Layout = () => {
@@ -9,8 +9,13 @@ export const Layout = () => {
         <div className={css.logo}>IdeaNick</div>
         <ul className={css.menu}>
           <li className={css.item}>
-            <Link className={css.link} to={getAllIteasRoute()}>
+            <Link className={css.link} to={route.getAllIteasRoute()}>
               All Ideas
+            </Link>
+          </li>
+          <li className={css.item}>
+            <Link className={css.link} to={route.getNewIdeaRoute()}>
+              Add Idea
             </Link>
           </li>
         </ul>

@@ -1,5 +1,5 @@
-@import "../../node_modules/reset-css/sass/reset.scss";
-@import "./_vars.scss";
+@import "../../node_modules/reset-css/sass/reset"; // убрали _
+@import "./vars"; // убрали _
 
 html,
 body,
@@ -19,8 +19,8 @@ body {
 }
 
 *,
-*::before,
-*::after {
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
