@@ -2,22 +2,25 @@
   "name": "@ideanick/backend",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "ts-node-dev --rs src/index.ts",
     "build": "rimraf ./dist && tsc - -build ./tsconfig.json",
     "start": "node ./dist/index.js",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts .",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts src",
     "types": "tsc --noEmit --project ./tsconfig.json",
     "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node/modules,dist}/**/*'"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
-    "@types/node": "^24.5.1",
-    "@types/express": "^5.0.3"
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.1"
   },
   "dependencies": {
     "@trpc/server": "^11.5.1",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "typescript-eslint": "^8.44.0"
   }
 }
