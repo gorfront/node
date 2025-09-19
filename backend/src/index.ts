@@ -17,6 +17,6 @@ expressApp.use(
   })
 );
 
-expressApp.listen(3000, () => {
-  console.info("Listening at http://localhost:3000");
+expressApp.listen(3200, () => {
+  console.info("Listening at http://localhost:3200");
 });
