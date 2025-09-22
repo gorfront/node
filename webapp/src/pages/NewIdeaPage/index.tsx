@@ -3,31 +3,41 @@ import { Textarea } from "../../components/Textarea";
 import { Input } from "../../components/Input";
 import { useFormik } from "formik";
 import { withZodSchema } from "formik-validator-zod";
-import z from "zod";
-
-const schema = z.object({
-  name: z.string().min(1),
-  nick: z
-    .string()
-    .min(1)
-    .regex(/^[a-z0-9-]+$/, "Nick may contain only lowercase letters, numbers and dashes"),
-  description: z.string().min(1),
-  text: z.string().min(100, "Text should be at least 100 characters long"),
-});
-
-type FormValues = z.infer<typeof schema>;
+import { trpc } from "../../lib/trpc";
+import { zCreateIdeaTrpcInput } from "@ideanick/backend/src/router/createIdea/input";
+import { useState } from "react";
+import { Alert } from "../../components/Alert";
+import { Button } from "../../components/Button";
+import { FormItems } from "../../components/FormItems";
 
 export const NewIdeaPage = () => {
-  const formik = useFormik<FormValues>({
+  const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+  const [submittingError, setSubmittingError] = useState<string | null>(null);
+  const createIdea = trpc.createIdea.useMutation();
+
+  const formik = useFormik({
     initialValues: {
       name: "",
       nick: "",
       description: "",
       text: "",
     },
-    validate: withZodSchema(schema) as unknown as (values: FormValues) => Partial<Record<keyof FormValues, string>>,
-    onSubmit: (values) => {
-      console.log("Form data", values);
+    
+    validate: withZodSchema(zCreateIdeaTrpcInput) as any,
+    onSubmit: async (values) => {
+      try {
+        await createIdea.mutateAsync(values);
+        formik.resetForm();
+        setSuccessMessageVisible(true);
+        setTimeout(() => {
+          setSuccessMessageVisible(false);
+        }, 3000);
+      } catch (error: any) {
+        setSubmittingError(error.message);
+        setTimeout(() => {
+          setSubmittingError(null);
+        }, 3000);
+      }
     },
   });
 
@@ -39,12 +49,16 @@ export const NewIdeaPage = () => {
           formik.handleSubmit();
         }}
       >
-        <Input name="name" label="Name" formik={formik} />
-        <Input name="nick" label="Nick" formik={formik} />
-        <Input name="description" label="Description" formik={formik} />
-        <Textarea name="text" label="Text" formik={formik} />
-        {!formik.isValid && !!formik.submitCount && <div style={{ color: "red" }}>Some fields are invalid</div>}
-        <button type="submit">Create Idea</button>
+        <FormItems>
+          <Input name="name" label="Name" formik={formik} />
+          <Input name="nick" label="Nick" formik={formik} />
+          <Input name="description" label="Description" formik={formik} maxWidth={500} />
+          <Textarea name="text" label="Text" formik={formik} />
+          {!formik.isValid && !!formik.submitCount && <div style={{ color: "red" }}>Some fields are invalid</div>}
+          {!!submittingError && <Alert color="red">{submittingError}</Alert>}
+          {successMessageVisible && <Alert color="green">Idea created!</Alert>}
+          <Button loading={formik.isSubmitting}>Create Idea</Button>
+        </FormItems>
       </form>
     </Segment>
   );

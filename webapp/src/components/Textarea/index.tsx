@@ -1,16 +1,34 @@
 import type { FormikProps } from "formik";
+import cn from "classnames";
+import css from "./index.module.scss";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Textarea = ({ name, label, formik }: { name: string; label: string; formik: FormikProps<any> }) => {
+
+export const Textarea = ({
+  name,
+  label,
+  formik,
+}: {
+  name: string;
+  label: string;
+  formik: FormikProps<any>;
+  maxWidth?: number;
+}) => {
   const value = formik.values[name];
   const error = formik.errors[name] as string | undefined;
   const touched = formik.touched[name] as boolean | undefined;
+  const invalid = !!touched && !!error;
+  const disabled = formik.isSubmitting;
 
   return (
-    <div style={{ marginBottom: 10 }}>
-      <label htmlFor={name}>{label}</label>
-      <br />
+    <div className={cn({ [css.field]: true, [css.disabled]: disabled })}>
+      <label className={css.label} htmlFor={name}>
+        {label}
+      </label>
       <textarea
+        className={cn({
+          [css.input]: true,
+          [css.invalid]: invalid,
+        })}
         onChange={(e) => {
           void formik.setFieldValue(name, e.target.value);
         }}
@@ -20,8 +38,9 @@ export const Textarea = ({ name, label, formik }: { name: string; label: string;
         value={value}
         name={name}
         id={name}
+        disabled={formik.isSubmitting}
       />
-      {!!touched && !!error && <div style={{ color: "red" }}>{error}</div>}
+      {invalid && <div className={css.error}>{error}</div>}{" "}
     </div>
   );
 };

@@ -1,10 +1,6 @@
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
-// import { fileURLToPath } from "url";
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
 export default [
   js.configs.recommended,
@@ -12,6 +8,7 @@ export default [
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
+      parser: tseslint.parser,
       parserOptions: {
         project: "./tsconfig.eslint.json",
         ecmaVersion: "latest",
@@ -19,13 +16,17 @@ export default [
       },
     },
     plugins: {
+      "@typescript-eslint": tseslint.plugin,
       react,
     },
-    rules: {},
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
   },
   {
     files: ["vite.config.ts"],
     languageOptions: {
+      parser: tseslint.parser,
       parserOptions: {
         project: "./tsconfig.node.json",
       },

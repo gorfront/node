@@ -1,7 +1,7 @@
 import { initTRPC } from "@trpc/server";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { type Express } from "express";
-import { type TrpcRouter } from "../router/index";
+import { type TrpcRouter } from "../router/index.ts";
 
 export const trpc = initTRPC.create();
 
