@@ -1,6 +1,10 @@
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
+// import { fileURLToPath } from "url";
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 export default [
   js.configs.recommended,
@@ -18,10 +22,6 @@ export default [
       react,
     },
     rules: {},
-    parserOptions: {
-      project: "./tsconfig.json",
-      tsconfigRootDir: __dirname,
-    },
   },
   {
     files: ["vite.config.ts"],
