@@ -18,6 +18,10 @@ export default [
       react,
     },
     rules: {},
+    parserOptions: {
+      project: "./tsconfig.json",
+      tsconfigRootDir: __dirname,
+    },
   },
   {
     files: ["vite.config.ts"],
