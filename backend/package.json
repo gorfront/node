@@ -4,12 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --loader ts-node/esm src/index.ts",
+    "dev": "node --watch ./.env --rs --loader ts-node/esm src/index.ts",
     "build": "rimraf ./dist && tsc - -build ./tsconfig.json",
     "start": "node ./dist/index.js",
+    "pmd": "prisma migrate dev",
+    "pgc": "prisma generate",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts src",
     "types": "tsc --noEmit --project ./tsconfig.json",
-    "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node/modules,dist}/**/*'"
+    "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node/modules,dist}/**/*'",
+    "prepare": "pnpm pgc"
+  },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
@@ -17,12 +23,14 @@
     "@types/node": "^24.5.1"
   },
   "dependencies": {
+    "@prisma/client": "^6.16.2",
     "@trpc/server": "^11.5.1",
     "@types/lodash": "^4.17.20",
     "@typescript-eslint/eslint-plugin": "^8.44.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "lodash": "^4.17.21",
+    "prisma": "^6.16.2",
     "typescript-eslint": "^8.44.0",
     "zod": "^4.1.9"
   }
