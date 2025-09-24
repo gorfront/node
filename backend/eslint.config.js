@@ -12,6 +12,8 @@ export default [
     plugins: {
       "@typescript-eslint": tseslint.plugin,
     },
-    rules: {},
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    },
   },
 ];

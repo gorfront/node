@@ -19,6 +19,7 @@
     "@trpc/client": "^11.5.1",
     "@trpc/react-query": "^11.5.1",
     "classnames": "^2.5.1",
+    "date-fns": "^4.1.0",
     "formik": "^2.4.6",
     "formik-validator-zod": "^2.2.0",
     "include-media": "^2.0.0",
@@ -26,6 +27,7 @@
     "react-dom": "^19.1.1",
     "reset-css": "^5.0.2",
     "sass": "^1.92.1",
+    "superjson": "^2.2.2",
     "zod": "^4.1.9"
   },
   "devDependencies": {
