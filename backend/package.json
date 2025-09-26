@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --loader ts-node/esm --watch-path=src --watch-path=.env src/index.ts",
-    "build": "rimraf ./dist && tsc - -build ./tsconfig.json",
+    "dev": "tsx watch src/index.ts",
+    "build": "rimraf ./dist && tsc --build ./tsconfig.json",
     "start": "node ./dist/index.js",
     "pmd": "prisma migrate dev",
     "pgc": "prisma generate",
@@ -20,7 +20,8 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
-    "@types/node": "^24.5.1"
+    "@types/node": "^24.5.1",
+    "tsx": "^4.20.6"
   },
   "dependencies": {
     "@prisma/client": "^6.16.2",

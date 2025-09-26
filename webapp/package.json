@@ -14,10 +14,13 @@
     "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'"
   },
   "dependencies": {
+    "@eslint/js": "^9.36.0",
     "@ideanick/backend": "workspace:*",
     "@tanstack/react-query": "^5.89.0",
     "@trpc/client": "^11.5.1",
     "@trpc/react-query": "^11.5.1",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
     "classnames": "^2.5.1",
     "date-fns": "^4.1.0",
     "formik": "^2.4.6",
