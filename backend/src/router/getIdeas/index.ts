@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { trpc } from "../../lib/trpc.ts";
 
 export const getIdeasTrpcRoute = trpc.procedure.query(async ({ ctx }) => {

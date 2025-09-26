@@ -1,5 +1,5 @@
-@import "../../styles/vars";
-@import "../../styles/mixins";
+@use "../../styles/vars";
+@use "../../styles/mixins";
 
 $breakpoint: "<=900px";
 
@@ -7,7 +7,8 @@ $breakpoint: "<=900px";
   display: flex;
   flex-flow: row nowrap;
   height: 100%;
-  @include media($breakpoint) {
+
+  @include mixins.media($breakpoint) {
     flex-flow: column nowrap;
   }
 
@@ -16,13 +17,14 @@ $breakpoint: "<=900px";
     overflow: auto;
     flex: 0 0 200px;
     padding: 20px 30px;
-    border-right: 1px solid $black;
-    @include media($breakpoint) {
+    border-right: 1px solid vars.$black;
+
+    @include mixins.media($breakpoint) {
       overflow: visible;
       flex: 0 0 auto;
       height: auto;
       border-right: none;
-      border-bottom: 1px solid $black;
+      border-bottom: 1px solid vars.$black;
     }
 
     .logo {
@@ -38,7 +40,7 @@ $breakpoint: "<=900px";
         }
 
         .link {
-          @include link;
+          @include mixins.link;
         }
       }
     }
@@ -49,7 +51,8 @@ $breakpoint: "<=900px";
     overflow: auto;
     flex: 1 1 100%;
     padding: 20px 30px;
-    @include media($breakpoint) {
+
+    @include mixins.media($breakpoint) {
       overflow: visible;
       flex: 0 0 auto;
       height: auto;

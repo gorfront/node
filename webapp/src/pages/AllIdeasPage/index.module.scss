@@ -1,14 +1,14 @@
-@import "../../styles/vars";
-@import "../../styles/mixins";
+@use "../../styles/vars";
+@use "../../styles/mixins";
 
 .title {
-  @include h1;
+  @include mixins.h1;
 }
 
 .ideas {
   .idea {
     padding: 20px;
-    border: 1px solid $black;
+    border: 1px solid vars.$black;
     border-radius: 10px;
 
     & + .idea {
@@ -16,10 +16,10 @@
     }
 
     .ideaName {
-      @include h2;
+      @include mixins.h2;
 
       .ideaLink {
-        @include link;
+        @include mixins.link;
       }
     }
 
