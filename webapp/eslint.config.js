@@ -26,6 +26,13 @@ export default [
       react,
     },
     rules: {
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "MemberExpression[object.object.name='process'][object.property.name='env']",
+          message: "Use import { env } from 'lib/env' instead of process.env",
+        },
+      ],
       "@typescript-eslint/no-explicit-any": "off",
     },
     settings: {

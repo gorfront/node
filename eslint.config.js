@@ -3,6 +3,7 @@ import tseslint from "typescript-eslint";
 import prettier from "eslint-config-prettier";
 import react from "eslint-plugin-react";
 import path from "path";
+import n from "eslint-plugin-n";
 
 export default [
   js.configs.recommended,
@@ -26,10 +27,12 @@ export default [
       },
     },
     plugins: {
+      n,
       "@typescript-eslint": tseslint.plugin,
       react,
     },
     rules: {
+      "n/no-process-env": "error",
       "@typescript-eslint/no-explicit-any": "off",
       "import/order": [
         "error",
@@ -65,9 +68,11 @@ export default [
       },
     },
     plugins: {
+      n,
       "@typescript-eslint": tseslint.plugin,
     },
     rules: {
+      "n/no-process-env": "error",
       "@typescript-eslint/no-explicit-any": "off",
     },
   },

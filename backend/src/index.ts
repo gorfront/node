@@ -4,6 +4,7 @@ import { applyTrpcToExpressApp } from "./lib/trpc.ts";
 import { trpcRouter } from "./router/index.ts";
 import { AppContext, createAppContext } from "./lib/ctx.ts";
 import { applyPassportToExpressApp } from "./lib/pasport.ts";
+import { env } from "./lib/env.ts";
 
 void (async () => {
   let ctx: AppContext | null = null;
@@ -16,8 +17,8 @@ void (async () => {
     });
     applyPassportToExpressApp(expressApp, ctx);
     await applyTrpcToExpressApp(expressApp, ctx, trpcRouter);
-    expressApp.listen(3200, () => {
-      console.info("Listening at http://localhost:3200");
+    expressApp.listen(env.PORT, () => {
+      console.info(`Listening at http://localhost:${env.PORT}`);
     });
   } catch (error) {
     console.error(error);
