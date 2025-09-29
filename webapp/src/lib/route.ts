@@ -4,10 +4,14 @@ const getRouteParams = <T extends Record<string, boolean>>(object: T) => {
 
 export const getAllIdeasRoute = () => "/";
 
-export const viewRouteParams = getRouteParams({ ideasNick: true });
+export const viewIdeaRouteParams = getRouteParams({ ideaNick: true });
 // eslint-disable-next-line no-redeclare
-export type viewRouteParams = typeof viewRouteParams;
-export const getViewIdeaRoute = ({ ideasNick }: viewRouteParams) => `/ideas/${ideasNick}`;
+export type viewIdeaRouteParams = typeof viewIdeaRouteParams;
+export const getViewIdeaRoute = ({ ideaNick }: viewIdeaRouteParams) => `/ideas/${ideaNick}`;
+
+export const editIdeaRouteParams = getRouteParams({ ideaNick: true });
+export type EditIdeaRouteParams = typeof viewIdeaRouteParams;
+export const getEditIdeaRoute = ({ ideaNick }: EditIdeaRouteParams) => `/ideas/${ideaNick}/edit`;
 
 export const getNewIdeaRoute = () => "/ideas/new";
 export const getSignUpRoute = () => "/sign-up";
