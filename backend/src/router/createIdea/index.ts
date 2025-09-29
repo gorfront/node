@@ -2,6 +2,9 @@ import { trpc } from "../../lib/trpc.ts";
 import { zCreateIdeaTrpcInput } from "./input.ts";
 
 export const createIdeaTrpcRoute = trpc.procedure.input(zCreateIdeaTrpcInput).mutation(async ({ input, ctx }) => {
+  if (!ctx.me) {
+    throw new Error("Not authenticated");
+  }
   const exIdea = await ctx.prisma.idea.findUnique({
     where: {
       nick: input.nick,
@@ -13,7 +16,7 @@ export const createIdeaTrpcRoute = trpc.procedure.input(zCreateIdeaTrpcInput).mu
   }
 
   await ctx.prisma.idea.create({
-    data: input,
+    data: { ...input, authorId: ctx.me.id },
   });
 
   return true;
