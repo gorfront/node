@@ -10,6 +10,7 @@ import { SignInPage } from "./pages/SignInPage";
 import { SignOutPage } from "./pages/SignOutPage";
 import { EditIdeaPage } from "./pages/EditIdeaPage";
 import { AppContextProvider } from "./lib/ctx";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path={routes.getViewIdeaRoute(routes.viewIdeaRouteParams)} element={<ViewIdeaPage />} />
               <Route path={routes.getNewIdeaRoute()} element={<NewIdeaPage />} />
               <Route path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)} element={<EditIdeaPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
