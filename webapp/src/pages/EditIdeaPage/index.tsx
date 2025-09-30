@@ -1,4 +1,3 @@
-import type { TrpcRouterOutput } from "@ideanick/backend/src/router";
 import { zUpdateIdeaTrpcInput } from "@ideanick/backend/src/router/updateIdea/input";
 import pick from "lodash/pick";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,8 +10,24 @@ import { Textarea } from "../../components/Textarea";
 import { trpc } from "../../lib/trpc";
 import { getViewIdeaRoute, type EditIdeaRouteParams } from "../../lib/route";
 import { useForm } from "../../lib/form";
+import { withPageWrapper } from "../../lib/pageWrapper";
 
-const EditIdeaComponent = ({ idea }: { idea: NonNullable<TrpcRouterOutput["getIdea"]["idea"]> }) => {
+export const EditIdeaPage = withPageWrapper({
+  authorizedOnly: true,
+  useQuery: () => {
+    const { ideaNick } = useParams() as EditIdeaRouteParams;
+    return trpc.getIdea.useQuery({
+      ideaNick,
+    });
+  },
+  setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
+    const idea = checkExists(queryResult.data.idea, "Idea not found");
+    checkAccess(ctx.me?.id === idea.authorId, "An idea can only be edited by the author");
+    return {
+      idea,
+    };
+  },
+})(({ idea }) => {
   const navigate = useNavigate();
   const updateIdea = trpc.updateIdea.useMutation();
   const { formik, buttonProps, alertProps } = useForm({
@@ -40,42 +55,4 @@ const EditIdeaComponent = ({ idea }: { idea: NonNullable<TrpcRouterOutput["getId
       </form>
     </Segment>
   );
-};
-
-export const EditIdeaPage = () => {
-  const { ideaNick } = useParams() as EditIdeaRouteParams;
-
-  const getIdeaResult = trpc.getIdea.useQuery({
-    ideaNick,
-  });
-  const getMeResult = trpc.getMe.useQuery();
-
-  if (getIdeaResult.isLoading || getIdeaResult.isFetching || getMeResult.isLoading || getMeResult.isFetching) {
-    return <span>Loading...</span>;
-  }
-
-  if (getIdeaResult.isError) {
-    return <span>Error: {getIdeaResult.error.message}</span>;
-  }
-
-  if (getMeResult.isError) {
-    return <span>Error: {getMeResult.error.message}</span>;
-  }
-
-  if (!getIdeaResult.data?.idea) {
-    return <span>Idea not found</span>;
-  }
-
-  const idea = getIdeaResult.data?.idea;
-  const me = getMeResult.data?.me;
-
-  if (!me) {
-    return <span>Only for authorized</span>;
-  }
-
-  if (me.id !== idea.authorId) {
-    return <span>An idea can only be edited by the author</span>;
-  }
-
-  return <EditIdeaComponent idea={idea} />;
-};
+});
