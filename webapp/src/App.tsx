@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TrpcProvider } from "./lib/trpc";
-import { AllIdeasPage } from "./pages/AllIdeasPage";
-import { ViewIdeaPage } from "./pages/ViewIdeaPage";
 import * as routes from "./lib/route";
 import { Layout } from "./components/layout";
-import { NewIdeaPage } from "./pages/NewIdeaPage";
-import { SignUpPage } from "./pages/SignUpPage";
-import { SignInPage } from "./pages/SignInPage";
-import { SignOutPage } from "./pages/SignOutPage";
-import { EditIdeaPage } from "./pages/EditIdeaPage";
 import { AppContextProvider } from "./lib/ctx";
-import { NotFoundPage } from "./pages/NotFoundPage";
+import { SignInPage } from "./pages/auth/SignInPage";
+import { SignOutPage } from "./pages/auth/SignOutPage";
+import { SignUpPage } from "./pages/auth/SignUpPage";
+import { AllIdeasPage } from "./pages/ideas/AllIdeasPage";
+import { EditIdeaPage } from "./pages/ideas/EditIdeaPage";
+import { NewIdeaPage } from "./pages/ideas/NewIdeaPage";
+import { ViewIdeaPage } from "./pages/ideas/ViewIdeaPage";
+import { NotFoundPage } from "./pages/other/NotFoundPage";
 
 function App() {
   return (
