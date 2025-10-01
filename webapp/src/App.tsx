@@ -11,6 +11,7 @@ import { EditIdeaPage } from "./pages/ideas/EditIdeaPage";
 import { NewIdeaPage } from "./pages/ideas/NewIdeaPage";
 import { ViewIdeaPage } from "./pages/ideas/ViewIdeaPage";
 import { NotFoundPage } from "./pages/other/NotFoundPage";
+import { EditProfilePage } from "./pages/auth/EditProfilePage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
               <Route path={routes.getSignInRoute()} element={<SignInPage />} />
+              <Route path={routes.getEditProfileRoute()} element={<EditProfilePage />} />
               <Route path={routes.getAllIdeasRoute()} element={<AllIdeasPage />} />
               <Route path={routes.getViewIdeaRoute(routes.viewIdeaRouteParams)} element={<ViewIdeaPage />} />
               <Route path={routes.getNewIdeaRoute()} element={<NewIdeaPage />} />
