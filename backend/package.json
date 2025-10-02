@@ -9,6 +9,7 @@
     "start": "node ./dist/index.js",
     "pmd": "prisma migrate dev",
     "pgc": "prisma generate",
+    "reset": "prisma migrate reset",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts src",
     "types": "tsc --noEmit --project ./tsconfig.json",
     "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node/modules,dist}/**/*'",

@@ -1,5 +1,5 @@
 import { trpc } from "../../../lib/trpc.ts";
-import { getPassworHash } from "../../../utils/getPassworHash.ts";
+import { getPasswordHash } from "../../../utils/getPasswordHash.ts";
 import { signJWT } from "../../../utils/signJWT.ts";
 import { zSignInTrpcInput } from "./input.ts";
 
@@ -7,7 +7,7 @@ export const signInTrpcRoute = trpc.procedure.input(zSignInTrpcInput).mutation(a
   const user = await ctx.prisma.user.findFirst({
     where: {
       nick: input.nick,
-      passwod: getPassworHash(input.password),
+      password: getPasswordHash(input.password),
     },
   });
   if (!user) {

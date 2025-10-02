@@ -11,7 +11,7 @@ model User {
   id        String   @id @default(uuid())
   nick      String   @unique
   name      String?  @default("")
-  passwod   String
+  password  String
   createdAt DateTime @default(now())
   ideas     Idea[]
 }
