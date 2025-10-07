@@ -11,6 +11,7 @@
 
 .text {
   font-size: 14px;
+  word-wrap: break-word;
 
   & > *:not(:first-child) {
     margin-top: 10px;

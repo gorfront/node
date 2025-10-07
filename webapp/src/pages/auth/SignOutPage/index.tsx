@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { trpc } from "../../../lib/trpc";
 import { getSignInRoute } from "../../../lib/route";
+import { Loader } from "../../../components/Loader";
 
 export const SignOutPage = () => {
   const navigate = useNavigate();
@@ -14,5 +15,5 @@ export const SignOutPage = () => {
     });
   }, []);
 
-  return <p>Loading...</p>;
+  return <Loader type="page" />;
 };

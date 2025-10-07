@@ -6,6 +6,7 @@ import { useAppContext, type AppContext } from "./ctx";
 import { getAllIdeasRoute } from "./route";
 import { ErrorPageComponent } from "../components/ErrorPageComponent";
 import { NotFoundPage } from "../pages/other/NotFoundPage";
+import { Loader } from "../components/Loader";
 
 class CheckExistsError extends Error {}
 const checkExistsFn = <T,>(value: T, message?: string): NonNullable<T> => {
@@ -87,7 +88,7 @@ const PageWrapper = <TProps extends Props = {}, TQueryResult extends QueryResult
   }, [redirectNeeded, navigate]);
 
   if (queryResult?.isLoading || queryResult?.isFetching || redirectNeeded) {
-    return <p>Loading...</p>;
+    return <Loader type="page" />;
   }
 
   if (queryResult?.isError) {

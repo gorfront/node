@@ -6,6 +6,7 @@ import css from "./index.module.scss";
 import { Alert } from "../../../components/Alert";
 import InfiniteScroll from "react-infinite-scroller";
 import { layoutContentElRef } from "../../../components/layout";
+import { Loader } from "../../../components/Loader";
 
 export const AllIdeasPage = () => {
   const { data, error, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage, isRefetching } =
@@ -23,7 +24,7 @@ export const AllIdeasPage = () => {
   return (
     <Segment title="All Ideas">
       {isLoading || isRefetching ? (
-        <div>Loading...</div>
+        <Loader type="section" />
       ) : isError ? (
         <Alert color="red">{error.message}</Alert>
       ) : (
@@ -38,7 +39,7 @@ export const AllIdeasPage = () => {
             hasMore={hasNextPage}
             loader={
               <div className={css.more} key="loader">
-                Loading...
+                <Loader type="section" />
               </div>
             }
             getScrollParent={() => layoutContentElRef.current}
