@@ -13,6 +13,7 @@ CREATE TABLE "public"."User" (
 CREATE TABLE "public"."Idea" (
     "id" TEXT NOT NULL,
     "nick" TEXT NOT NULL,
+    "serialNumber" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "text" TEXT NOT NULL,
@@ -27,6 +28,9 @@ CREATE UNIQUE INDEX "User_nick_key" ON "public"."User"("nick");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Idea_nick_key" ON "public"."Idea"("nick");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Idea_serialNumber_key" ON "public"."Idea"("serialNumber");
 
 -- AddForeignKey
 ALTER TABLE "public"."Idea" ADD CONSTRAINT "Idea_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
