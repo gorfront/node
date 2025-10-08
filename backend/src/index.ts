@@ -5,11 +5,13 @@ import { trpcRouter } from "./router/index.ts";
 import { AppContext, createAppContext } from "./lib/ctx.ts";
 import { applyPassportToExpressApp } from "./lib/pasport.ts";
 import { env } from "./lib/env.ts";
+import { presetDb } from "./scripts/presetDb.ts";
 
 void (async () => {
   let ctx: AppContext | null = null;
   try {
     ctx = createAppContext();
+    await presetDb(ctx);
     const expressApp = express();
     expressApp.use(cors());
     expressApp.get("/ping", (req, res) => {

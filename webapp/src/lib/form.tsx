@@ -16,7 +16,7 @@ export const useForm = <TZodSchema extends z.ZodTypeAny>({
   successMessage?: string | false;
   resetOnSuccess?: boolean;
   showValidationAlert?: boolean;
-  initialValues?: z.infer<TZodSchema>;
+  initialValues: z.infer<TZodSchema>;
   validationSchema?: TZodSchema;
   // eslint-disable-next-line no-unused-vars
   onSubmit?: (values: z.infer<TZodSchema>, actions: FormikHelpers<z.infer<TZodSchema>>) => Promise<any> | any;
@@ -25,7 +25,8 @@ export const useForm = <TZodSchema extends z.ZodTypeAny>({
   const [submittingError, setSubmittingError] = useState<Error | null>(null);
 
   const formik = useFormik<z.infer<TZodSchema>>({
-    initialValues,
+    initialValues: initialValues ?? ({} as z.infer<TZodSchema>),
+    enableReinitialize: true,
     ...(validationSchema && { validate: withZodSchema(validationSchema) }),
     onSubmit: async (values, formikHelpers) => {
       if (!onSubmit) return;
@@ -33,12 +34,10 @@ export const useForm = <TZodSchema extends z.ZodTypeAny>({
         setSubmittingError(null);
         await onSubmit(values, formikHelpers);
         if (resetOnSuccess) {
-          formik.resetForm();
+          formik.resetForm({ values: initialValues });
         }
         setSuccessMessageVisible(true);
-        setTimeout(() => {
-          setSuccessMessageVisible(false);
-        }, 3000);
+        setTimeout(() => setSuccessMessageVisible(false), 3000);
       } catch (error: any) {
         setSubmittingError(error);
       }
@@ -47,42 +46,23 @@ export const useForm = <TZodSchema extends z.ZodTypeAny>({
 
   const alertProps = useMemo<AlertProps>(() => {
     if (submittingError) {
-      return {
-        hidden: false,
-        children: submittingError.message,
-        color: "red",
-      };
+      return { hidden: false, children: submittingError.message, color: "red" };
     }
     if (showValidationAlert && !formik.isValid && !!formik.submitCount) {
-      return {
-        hidden: false,
-        children: "Some fields are invalid",
-        color: "red",
-      };
+      return { hidden: false, children: "Some fields are invalid", color: "red" };
     }
     if (successMessageVisible && successMessage) {
-      return {
-        hidden: false,
-        children: successMessage,
-        color: "green",
-      };
+      return { hidden: false, children: successMessage, color: "green" };
     }
-    return {
-      color: "red",
-      hidden: true,
-      children: null,
-    };
+    return { color: "red", hidden: true, children: null };
   }, [submittingError, formik.isValid, formik.submitCount, successMessageVisible, successMessage, showValidationAlert]);
 
-  const buttonProps = useMemo<Omit<ButtonProps, "children">>(() => {
-    return {
+  const buttonProps = useMemo<Omit<ButtonProps, "children">>(
+    () => ({
       loading: formik.isSubmitting,
-    };
-  }, [formik.isSubmitting]);
+    }),
+    [formik.isSubmitting]
+  );
 
-  return {
-    formik,
-    alertProps,
-    buttonProps,
-  };
+  return { formik, alertProps, buttonProps };
 };
