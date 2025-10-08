@@ -28,3 +28,9 @@ errors.text = "Text should be at least 100 characters long";
 }
 return errors;
 },
+
+
+https://tinypng.com/ ------- for compress images
+https://scale.flexiple.com/illustrations/single/   ------- for images
+https://www.reshot.com/  ------- for free icons
+https://realfavicongenerator.net/ --------- for free favicon
