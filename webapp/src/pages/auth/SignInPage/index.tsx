@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 
 export const SignInPage = withPageWrapper({
   redirectAuthorized: true,
+  title: "Sign In",
 })(() => {
   const navigate = useNavigate();
   const trpcUtils = trpc.useContext();

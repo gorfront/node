@@ -11,8 +11,12 @@ import { useForm } from "../../../lib/form";
 import { zGetIdeasTrpcInput } from "@ideanick/backend/src/router/ideas/getIdeas/input";
 import { Input } from "../../../components/Input";
 import { useDebounce } from "use-debounce";
+import { withPageWrapper } from "../../../lib/pageWrapper";
 
-export const AllIdeasPage = () => {
+export const AllIdeasPage = withPageWrapper({
+  title: "IdeaNick",
+  isTitleExact: true,
+})(() => {
   const { formik } = useForm({
     initialValues: { search: "" },
     validationSchema: zGetIdeasTrpcInput.pick({ search: true }),
@@ -82,4 +86,4 @@ export const AllIdeasPage = () => {
       )}
     </Segment>
   );
-};
+});

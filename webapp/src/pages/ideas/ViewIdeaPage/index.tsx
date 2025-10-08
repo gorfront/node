@@ -49,6 +49,7 @@ const BlockIdea = ({ idea }: { idea: NonNullable<TrpcRouterOutput["getIdea"]["id
   const blockIdea = trpc.blockIdea.useMutation();
   const trpcUtils = trpc.useContext();
   const { formik, alertProps, buttonProps } = useForm({
+    initialValues: {},
     onSubmit: async () => {
       await blockIdea.mutateAsync({ ideaId: idea.id });
       await trpcUtils.getIdea.refetch({ ideaNick: idea.nick });
@@ -78,6 +79,7 @@ export const ViewIdeaPage = withPageWrapper({
     me: ctx.me,
   }),
   showLoaderOnFetching: false,
+  title: ({ idea }) => idea.name,
 })(({ idea, me }) => (
   <Segment title={idea.name} description={idea.description}>
     <div className={css.createdAt}>Created At: {format(idea.createdAt, "yyyy-MM-dd")}</div>
